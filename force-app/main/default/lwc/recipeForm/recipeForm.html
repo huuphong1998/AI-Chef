@@ -1,0 +1,49 @@
+<template>
+    <form>
+        <h1 class="slds-text-heading_large slds-var-p-around_small">Find your perfect recipe using AI</h1>
+        <lightning-textarea
+            label="Ingredients (comma separated)"
+            placeholder="e.e., chicken, bell peppers, onions etc"
+            required
+            name="ingredients"
+            value={formData.ingredients}
+            onchange={handleChange}
+        ></lightning-textarea>
+
+        <lightning-combobox
+            label="Dietary Restrictions"
+            placeholder="Select restrictions"
+            name="dietaryRestrictions"
+            value={formData.dietaryOptions}
+            options={dietaryOptions}
+            onchange={handleChange}
+        ></lightning-combobox>
+
+        <lightning-combobox
+            label="Meal Type"
+            placeholder="Select meal type"
+            name="mealType"
+            value={formData.mealType}
+            options={mealTypeOptions}
+            onchange={handleChange}
+        ></lightning-combobox>
+
+        <lightning-input
+            type="number"
+            label="Servings"
+            name="servings"
+            value={formData.servings}
+            onchange={handleChange}
+        ></lightning-input>
+
+        <div class="slds-var-m-top_medium"></div>
+
+        <lightning-button
+            label="Generate Recipes"
+            variant="brand"
+            icon-name="utility:recipe"
+            stretch
+            onclick={generateRecipes}
+        ></lightning-button>
+    </form>
+</template>
