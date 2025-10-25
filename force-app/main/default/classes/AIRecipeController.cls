@@ -28,7 +28,7 @@ public with sharing class AIRecipeController {
             //2. Will create the configuration which is required for invoking the promt template
             ConnectApi.EinsteinPromptTemplateGenerationsInput executeTemplateInput = new ConnectApi.EinsteinPromptTemplateGenerationsInput();
             executeTemplateInput.additionalConfig = new ConnectApi.EinsteinLlmAdditionalConfigInput();
-            executeTemplateInput.additionalConfig.applicationName = 'Recipe_Generator';
+            executeTemplateInput.additionalConfig.applicationName = 'PromptBuilderPreview';
             executeTemplateInput.isPreview = false;
             executeTemplateInput.inputParams = inputParams;
 

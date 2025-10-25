@@ -1,10 +1,30 @@
 import { LightningElement } from "lwc";
+import generateAIRecipes from "@salesforce/apex/AIRecipeController.generateAIRecipes";
 
 export default class RecipeGenerator extends LightningElement {
     formData = {};
+    recipes = [];
 
-    generateRecipes(event) {
+    async generateRecipes(event) {
         this.formData = event.detail.formData;
         console.log("this.formData", JSON.stringify(this.formData));
+
+        try {
+            const result = await generateAIRecipes({
+                ingredients: this.formData.ingredients,
+                dietaryRestrictions: this.formData.dietaryRestrictions,
+                mealType: this.formData.mealType,
+                servings: this.formData.servings
+            });
+            console.log("result", result);
+            this.formatResponse(result);
+        } catch (error) {
+            console.error("Error generating recipes: ", error);
+        }
+    }
+
+    formatResponse(result) {
+        const correctJson = result.replaceAll(/[\n\u00A0]/g, "").trim();
+        this.recipes = JSON.parse(correctJson);
     }
 }
