@@ -16,6 +16,7 @@
                                 class="slds-badge_inverse slds-var-m-vertical_medium"
                             ></lightning-badge>
                         </template>
+                        <!-- Recipe Stat Box -->
                         <lightning-layout vertical-align="center" multiple-rows="true">
                             <lightning-layout-item size="3" padding="around-small">
                                 <c-recipe-stat-box
@@ -44,6 +45,29 @@
                                     value={recipe.servings}
                                     icon-name="utility:user"
                                 ></c-recipe-stat-box>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <!-- Instructions and ingredients -->
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="5" padding="around-small">
+                                <h3 class="slds-text-heading_small slds-var-p-bottom_small slds-border_bottom">
+                                    Ingredients
+                                </h3>
+                                <ul class="slds-list_dotted">
+                                    <template for:each={recipe.ingredients} for:item="ingredient">
+                                        <li key={ingredient.name} class="slds-var-p-vertical_x-small">
+                                            <div class="slds-grid">
+                                                <div class="slds-col slds-size_2-of-4">
+                                                    <strong>{ingredient.amount} {ingredient.unit}</strong>
+                                                </div>
+                                                <div class="slds-col slds-size_2-of-4">{ingredient.name}</div>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="7" padding="around-small">
+                                <div class="custom-box">2</div>
                             </lightning-layout-item>
                         </lightning-layout>
                     </div>
