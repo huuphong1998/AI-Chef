@@ -4,8 +4,10 @@ import generateAIRecipes from "@salesforce/apex/AIRecipeController.generateAIRec
 export default class RecipeGenerator extends LightningElement {
     formData = {};
     recipes = [];
+    isGenerating = false;
 
     async generateRecipes(event) {
+        this.isGenerating = true;
         this.formData = event.detail.formData;
         console.log("this.formData", JSON.stringify(this.formData));
 
@@ -20,11 +22,29 @@ export default class RecipeGenerator extends LightningElement {
             this.formatResponse(result);
         } catch (error) {
             console.error("Error generating recipes: ", error);
+        } finally {
+            this.isGenerating = false;
         }
     }
 
     formatResponse(result) {
         const correctJson = result.replaceAll(/[\n\u00A0]/g, "").trim();
-        this.recipes = JSON.parse(correctJson);
+        const parsedResponse = JSON.parse(correctJson);
+
+        if (parsedResponse?.recipes?.length > 0) {
+            this.recipes = parsedResponse.recipes.map((recipe) => {
+                if (!recipe.tags) {
+                    recipe.tags = [];
+                }
+                if (!recipe.total_time) {
+                    const prepTime = parseInt(recipe.prep_time, 10) || 0;
+                    const cookTime = parseInt(recipe.cook_time, 10) || 0;
+                    recipe.total_time = `${prepTime + cookTime} min`;
+                }
+                return recipe;
+            });
+        } else {
+            this.recipes = [];
+        }
     }
 }
