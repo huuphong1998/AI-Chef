@@ -70,11 +70,11 @@
                                 <h3 class="slds-text-heading_small slds-var-p-bottom_small slds-border_bottom">
                                     Ingredients
                                 </h3>
-                                <ul class="slds-list_ordered">
+                                <ol class="slds-list_ordered">
                                     <template for:each={recipe.instructions} for:item="instruction">
                                         <li key={instruction} class="slds-var-p-vertical_x-small">{instruction}</li>
                                     </template>
-                                </ul>
+                                </ol>
                             </lightning-layout-item>
                         </lightning-layout>
                     </div>
