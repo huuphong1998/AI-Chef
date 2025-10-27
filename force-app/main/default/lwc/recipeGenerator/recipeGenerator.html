@@ -77,6 +77,15 @@
                                 </ol>
                             </lightning-layout-item>
                         </lightning-layout>
+
+                        <!-- Chef Tip -->
+                        <div class="tips">
+                            <div class="slds-grid">
+                                <lightning-icon icon-name="utility:light_bulb" size="small"></lightning-icon>
+                                <h3 class="slds-text-heading_small">Chef's Tips</h3>
+                            </div>
+                            <p>{recipe.tips}</p>
+                        </div>
                     </div>
                 </template>
                 <template lwc:if={isGenerating}> <lightning-spinner size="medium"></lightning-spinner> </template>

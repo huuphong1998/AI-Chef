@@ -5,3 +5,10 @@
 .slds-box {
     background: #ffffff;
 }
+
+.tips {
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #cdcdcd;
+}
