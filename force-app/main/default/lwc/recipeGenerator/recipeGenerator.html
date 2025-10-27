@@ -3,6 +3,11 @@
         <lightning-layout multiple-row="true">
             <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
                 <c-recipe-form ongenerate={generateRecipes}></c-recipe-form>
+                <template lwc:if={error}>
+                    <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                        <h2>{error}</h2>
+                    </div>
+                </template>
             </lightning-layout-item>
             <lightning-layout-item size="12" medium-device-size="8" padding="horizontal-small">
                 <template for:each={recipes} for:item="recipe">

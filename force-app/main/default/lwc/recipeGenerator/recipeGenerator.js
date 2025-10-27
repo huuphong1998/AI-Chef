@@ -5,11 +5,21 @@ export default class RecipeGenerator extends LightningElement {
     formData = {};
     recipes = [];
     isGenerating = false;
+    error = "";
 
     async generateRecipes(event) {
-        this.isGenerating = true;
+        this.error = "";
         this.formData = event.detail.formData;
         console.log("this.formData", JSON.stringify(this.formData));
+        if (!this.formData?.ingredients) {
+            this.error = "Please enter ingredients";
+            return;
+        }
+        if (!this.formData?.mealType) {
+            this.error = "Please enter meal type";
+            return;
+        }
+        this.isGenerating = true;
 
         try {
             const result = await generateAIRecipes({
@@ -22,6 +32,7 @@ export default class RecipeGenerator extends LightningElement {
             this.formatResponse(result);
         } catch (error) {
             console.error("Error generating recipes: ", error);
+            this.error = error.body?.message || error.message || "An unexpected error occurred";
         } finally {
             this.isGenerating = false;
         }
@@ -44,6 +55,7 @@ export default class RecipeGenerator extends LightningElement {
                 return recipe;
             });
         } else {
+            this.error = "No recipes were generated. Please try again with different inputs";
             this.recipes = [];
         }
     }

@@ -15,6 +15,7 @@
             placeholder="Select restrictions"
             name="dietaryRestrictions"
             value={formData.dietaryOptions}
+            required
             options={dietaryOptions}
             onchange={handleChange}
         ></lightning-combobox>
@@ -24,6 +25,7 @@
             placeholder="Select meal type"
             name="mealType"
             value={formData.mealType}
+            required
             options={mealTypeOptions}
             onchange={handleChange}
         ></lightning-combobox>
@@ -33,6 +35,7 @@
             label="Servings"
             name="servings"
             value={formData.servings}
+            required
             onchange={handleChange}
         ></lightning-input>
 

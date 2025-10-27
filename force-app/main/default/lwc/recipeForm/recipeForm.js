@@ -1,7 +1,12 @@
 import { LightningElement } from "lwc";
 
 export default class RecipeForm extends LightningElement {
-    formData = {};
+    formData = {
+        ingredients: "",
+        dietaryRestrictions: "none",
+        mealType: "",
+        servings: ""
+    };
     dietaryOptions = [
         { label: "None", value: "none" },
         { label: "Vegetarian", value: "vegetarian" },
